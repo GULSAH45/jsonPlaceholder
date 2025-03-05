@@ -5,8 +5,11 @@ import Users, { usersLoader } from "./pages/Users";
 import Favs from "./pages/Favs";
 import UserDetail, { UserDetailLoader } from "./pages/UserDetail";
 import Post, { PostLoader } from "./pages/Post";
+import PostAndComment, { PostCommentLoader } from "./pages/PostAndComment";
 import Album, { AlbumLoader } from "./pages/Album";
-import Todos from "./pages/Todos";
+import Todos, { TodosLoader } from "./pages/Todos";
+import AlbumDetail, { albumDetailLoader } from "./pages/AlbumDetail";
+
 
 const routes: RouteObject[] = [
   {
@@ -23,6 +26,8 @@ const routes: RouteObject[] = [
         element: <Users />,
         loader: usersLoader,
       },
+
+
       {
         path: "/users/:userId",
         element: <UserDetail />,
@@ -32,15 +37,22 @@ const routes: RouteObject[] = [
             path: "posts",
             element: <Post/>,
             loader: PostLoader
-
+    
           },
-        { path: " albums",
+          {
+            path: "posts/:postId",
+            element: <PostAndComment/>,
+            loader: PostCommentLoader
+          },
+        { path: "albums",
             element: <Album />,
-            loader: AlbumLoader
+            loader: AlbumLoader,
+          
         },
           {
             path:"todos",
-            element:<Todos/>
+            element:<Todos/>,
+            loader:TodosLoader
           }
 
         ]
@@ -49,6 +61,9 @@ const routes: RouteObject[] = [
         path: "favs",
         element: <Favs />,
       },
+      {path: "/users/:userId/albums/:albumId",
+     element: <AlbumDetail />,
+     loader: albumDetailLoader,}
     ],
   },
 ];

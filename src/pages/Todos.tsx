@@ -8,7 +8,7 @@ interface TodosParam {
 }
 
 export const TodosLoader = async ({ params }: LoaderFunctionArgs) => {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/users/${params.id}/todos`);
+  const response = await fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}/todos`);
   
   if (!response.ok) {
     throw new Error("Todos not found");

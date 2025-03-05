@@ -1,4 +1,4 @@
-import { useLoaderData, LoaderFunctionArgs } from "react-router-dom";
+import { useLoaderData, LoaderFunctionArgs, Link, useParams} from "react-router-dom";
 
 interface PostParams {
   userId: number;
@@ -18,14 +18,14 @@ export const PostLoader = async ({ params }: LoaderFunctionArgs) => {
 
 function Post() {
   const posts = useLoaderData() as PostParams[];
-
+  const{ userId } = useParams();
   return (
     <>
       <h1>Posts</h1>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            <h2>{post.title}</h2>
+            <Link to={`/users/${userId}/posts/${post.id}`}>{post.title}</Link>
           </li>
         ))}
       </ul>

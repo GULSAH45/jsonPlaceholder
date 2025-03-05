@@ -23,7 +23,6 @@ function UserDetail() {
       <p>{userDetail.username}</p>
       <p>{userDetail.email}</p>
 
-  
 
       <Link to={`/users/${userId}/posts`}>Posts</Link>
       <Link to={`/users/${userId}/albums`}>Albums</Link>

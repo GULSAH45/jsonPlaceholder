@@ -1,5 +1,4 @@
 import { Link, useLoaderData } from "react-router-dom";
-import "./Users.css";
 
 interface UserParams {
   id: number;
@@ -18,13 +17,9 @@ function Users() {
   return (
     <>
       <h1>Users</h1>
-      <ul className="users-list">
+      <ul className="nameslist">
         {users.map((user) => (
-          <Link to={`/users/${user.id}`}
-            key={user.id}
-          >
-            {user.name}
-          </Link>
+          <Link to={`/users/${user.id}`} key={user.id}>{user.name}</Link>
         ))}
       </ul>
     </>
