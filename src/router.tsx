@@ -60,6 +60,7 @@ const routes: RouteObject[] = [
       {
         path: "favs",
         element: <Favs />,
+     
       },
       {path: "/users/:userId/albums/:albumId",
      element: <AlbumDetail />,

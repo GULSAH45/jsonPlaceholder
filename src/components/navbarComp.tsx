@@ -1,7 +1,10 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useStore} from "../store/storefavs";
+
 
 function navbarComp() {
+  const {favorites: favorites} = useStore();
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
@@ -14,7 +17,7 @@ function navbarComp() {
             Users
           </Nav.Link>
           <Nav.Link as={Link} to={"/favs"} href="#pricing">
-            FAVS
+             Favs({favorites.length})
           </Nav.Link>
         </Nav>
       </Container>
