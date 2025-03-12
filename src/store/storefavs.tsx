@@ -3,7 +3,7 @@ import {persist} from "zustand/middleware"
 import { PhotoParams } from "../pages/AlbumDetail";
 
 
-interface FavsParams {
+export interface FavsParams {
     favorites: PhotoParams[],
     addFav: (photo: PhotoParams ) => void,
     removeFav: (id: number) => void,
@@ -11,16 +11,24 @@ interface FavsParams {
 }
 
 
-
-export const useStore = create()(
-persist(
-    (set) => ({
+export const useStore = create<FavsParams>()(
+    persist(
+      (set) => ({
         favorites: [],
-        addFav:(photo:PhotoParams)=>set((state) => ({favorites: [...state.favorites, photo],})),
-        removeFav:(id:number)=>set((state) => ({favorites: state.favorites.filter((photo) => photo.id !== id),})),
-    }),
-    {
-        name: 'favs-store',
-    }
-)
-)
+        userId: 0, // Varsayılan userId ekledik
+        addFav: (photo: PhotoParams) =>
+          set((state) => ({
+            favorites: [...state.favorites, photo],
+          })),
+        removeFav: (id: number) =>
+          set((state) => ({
+            favorites: state.favorites.filter((photo) => photo.id !== id),
+          })),
+        setUserId: (id: number) => set(() => ({ userId: id })), // Kullanıcı ID'sini değiştirme fonksiyonu
+      }),
+      {
+        name: "favs-store",
+      }
+    )
+  );
+  
