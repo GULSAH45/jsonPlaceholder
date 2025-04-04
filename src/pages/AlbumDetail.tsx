@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useStore } from "../store/storefavs";
 
 export interface PhotoParams {
+
   albumId?: number;
   id: number;
   title: string;
@@ -21,38 +22,20 @@ export const albumDetailLoader = async ({ params }: LoaderFunctionArgs) => {
   return photos;
 };
 
+
 function AlbumDetail() {
   const photos = useLoaderData() as PhotoParams[];
   const { userId } = useParams();
+  
   const { favorites, addFav, removeFav } = useStore();
 
-  const [pixabayImages, setPixabayImages] = useState<any[]>([]);
-
-  // API anahtarınızı buraya koyun
-  const API_KEY = "49291635-18a83f2b0d68deb32e8d2875a";
-
-  // Kullanıcıya göre dinamik resim sorgulama
-  useEffect(() => {
-    const fetchPixabayImages = async () => {
-      try {
-        const response = await fetch(
-          `https://pixabay.com/api/?key=${API_KEY}&q=morocco&image_type=photo&per_page=6&page=1`
-        );
-        const data = await response.json();
-        setPixabayImages(data.hits); // Pixabay'dan gelen resimleri state'e kaydediyoruz
-      } catch (error) {
-        console.error("Hata oluştu:", error);
-      }
-    };
-
-    fetchPixabayImages();
-  }, [userId]); // userId'ye göre resimler güncellenir
 
   const handleLike = (photo: PhotoParams) => {
     if (favorites.some((fav: { id: number }) => fav.id === photo.id)) {
       removeFav(photo.id);
     } else {
-      addFav({ ...photo, userId: Number(userId) });
+      addFav({ ...photo, userId: Number(userId) },
+       "https://picsum.photos/id/" + photo.id + "/200/200" + "?blur");
     }
   };
 
@@ -74,7 +57,7 @@ function AlbumDetail() {
             <Card className="bg-dark text-white border-danger shadow-lg">
               <Card.Img
                 variant="top"
-                src={pixabayImages.length > 0 ? pixabayImages[photo.id % pixabayImages.length].webformatURL : photo.thumbnailUrl}
+                src={"https://picsum.photos/id/" + photo.id + "/200/200" + "?blur"}
               />
               <Card.Body>
                 <Card.Title className="text-danger">{photo.title}</Card.Title>

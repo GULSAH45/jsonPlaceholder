@@ -15,7 +15,7 @@ function Favs() {
           {favorites.map((photo: PhotoParams) => (
             <Col md={4} lg={3} className="mb-4" key={photo.id}>
               <Card className="bg-dark text-white border-danger shadow-lg">
-                <Card.Img variant="top" src={photo.thumbnailUrl} />
+                <Card.Img variant="top" src={photo.url} />
                 <Card.Body>
                   <Card.Title className="text-danger">{photo.title}</Card.Title>
                   <Button

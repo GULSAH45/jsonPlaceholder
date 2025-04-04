@@ -5,7 +5,7 @@ import { PhotoParams } from "../pages/AlbumDetail";
 
 export interface FavsParams {
     favorites: PhotoParams[],
-    addFav: (photo: PhotoParams ) => void,
+    addFav: (photo: PhotoParams, url:string ) => void,
     removeFav: (id: number) => void,
     userId: number
 }
@@ -16,9 +16,9 @@ export const useStore = create<FavsParams>()(
       (set) => ({
         favorites: [],
         userId: 0, // Varsayılan userId ekledik
-        addFav: (photo: PhotoParams) =>
+        addFav: (photo: PhotoParams, url:string) =>
           set((state) => ({
-            favorites: [...state.favorites, photo],
+            favorites: [...state.favorites, {...photo, url:url}],
           })),
         removeFav: (id: number) =>
           set((state) => ({
