@@ -1,6 +1,6 @@
 import { Button, Card, Row, Col, Container } from "react-bootstrap";
 import { LoaderFunctionArgs, useLoaderData, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useStore } from "../store/storefavs";
 
 export interface PhotoParams {
@@ -18,8 +18,7 @@ export const albumDetailLoader = async ({ params }: LoaderFunctionArgs) => {
     `https://jsonplaceholder.typicode.com/albums/${params.albumId}/photos`
   );
   const photos = await response.json();
-  console.log(photos);
-  return photos;
+  return photos.slice(0, 5); // Only return the first 5 photos
 };
 
 

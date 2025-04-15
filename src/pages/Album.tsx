@@ -13,7 +13,7 @@ export const AlbumLoader = async ({ params }: LoaderFunctionArgs) => {
     `https://jsonplaceholder.typicode.com/users/${params.userId}/albums`
   );
   const albums = await response.json();
-  return albums;
+  return albums.slice(0, 2); // Only return the first 2 albums
 };
 
 function Album() {
@@ -37,6 +37,11 @@ function Album() {
         {albums.map((album) => (
           <Col md={4} lg={3} className="mb-4" key={album.id}>
             <Card className="bg-dark text-white border-danger shadow-lg h-100">
+              <Card.Img 
+                variant="top" 
+                src={`https://picsum.photos/seed/album${album.id}/200/150?blur`} 
+                alt={album.title}
+              />
               <Card.Body className="text-center">
                 <Card.Title className="text-danger">{album.title}</Card.Title>
                 <Link
